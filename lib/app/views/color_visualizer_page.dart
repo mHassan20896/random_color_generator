@@ -28,10 +28,15 @@ class _ColorVisualizerPageState extends State<ColorVisualizerPage> {
       body: StreamBuilder<Color>(
         stream: _colorGeneratorStream.stream,
         builder: (context, snapshot) {
-          return AnimatedContainer(
-            duration: const Duration(milliseconds: 500),
-            color: snapshot.data,
-          );
+          return snapshot.data != null
+              ? AnimatedContainer(
+                  key: ValueKey(snapshot.data?.value),
+                  duration: const Duration(milliseconds: 500),
+                  color: snapshot.data,
+                )
+              : const Center(
+                  child: CircularProgressIndicator(),
+                );
         },
       ),
     );

@@ -8,6 +8,8 @@ import 'package:random_color_generator/app/business/random_color_generator_impl.
 class ColorGeneratorStream {
   final _controller = StreamController<Color>.broadcast();
 
+  Timer? _timer;
+
   /// Creates a [RandomColorGeneratorImpl].
   final RandomColorGenerator _colorGenerator;
 
@@ -26,13 +28,14 @@ class ColorGeneratorStream {
 
   /// initiates generating colors periodically for every second
   void initiateGeneratingColors() {
-    Timer.periodic(const Duration(seconds: 1), (_) {
+    _timer = Timer.periodic(const Duration(seconds: 1), (_) {
       _generate();
     });
   }
 
   /// Disposes the stream.
   void dispose() {
+    _timer?.cancel();
     _controller.close();
   }
 }
