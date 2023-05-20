@@ -30,7 +30,6 @@ class _ColorVisualizerPageState extends State<ColorVisualizerPage> {
         builder: (context, snapshot) {
           return snapshot.data != null
               ? AnimatedContainer(
-                  key: ValueKey(snapshot.data?.value),
                   duration: const Duration(milliseconds: 500),
                   color: snapshot.data,
                 )
